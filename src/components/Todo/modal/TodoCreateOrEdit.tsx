@@ -4,6 +4,7 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useState } from "react";
 import dayjs from "dayjs";
+import { DATE_FORMAT } from "~/constants";
 import { ITodo, useTodoList } from "../context/TodoContext";
 import classes from "../Todo.module.scss";
 import { TodoDelete } from "./TodoDelete";
@@ -39,7 +40,7 @@ export function TodoCreateOrEdit({ isEdit, todo, todoDate, open, handleClose }: 
     description: "",
   });
   const [date, setDate] = useState<Date | null>(
-    isEdit && todoDate ? dayjs(todoDate, "DD/MM/YYYY").toDate() : new Date(),
+    isEdit && todoDate ? dayjs(todoDate, DATE_FORMAT).toDate() : new Date(),
   );
   const [openDelete, setOpenDelete] = useState(false);
 
@@ -57,11 +58,11 @@ export function TodoCreateOrEdit({ isEdit, todo, todoDate, open, handleClose }: 
       return setFieldError({ title: "Task title is required" });
     }
     if (isEdit && todoDate) {
-      editTodo(dayjs(date).format("DD/MM/YYYY"), newTodo, todoDate);
+      editTodo(dayjs(date).format(DATE_FORMAT), newTodo, todoDate);
       return handleClose?.();
     }
     if (date) {
-      addTodo(dayjs(date).format("DD/MM/YYYY"), { ...newTodo, id: setId() });
+      addTodo(dayjs(date).format(DATE_FORMAT), { ...newTodo, id: setId() });
       return handleClose?.();
     }
   };
@@ -69,7 +70,7 @@ export function TodoCreateOrEdit({ isEdit, todo, todoDate, open, handleClose }: 
   const colorElements = colors.map((col, i) => (
     <div
       key={i}
-      className={col === newTodo.color ? classes.todo__create_color__active : ""}
+      className={col === newTodo.color ? classes.todo__modal_color__active : ""}
       aria-hidden
       onClick={() => handleChangeNewTodo("color", col)}
       style={{ background: col }}
@@ -91,8 +92,8 @@ export function TodoCreateOrEdit({ isEdit, todo, todoDate, open, handleClose }: 
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div className={`modal container ${classes.todo__create}`}>
-          <div className={classes.todo__create_title}>
+        <div className={`modal container ${classes.todo__modal}`}>
+          <div className={classes.todo__modal_title}>
             <h2>{isEdit ? "Edit todo" : "Create todo"}</h2>
             {isEdit && (
               <Button
@@ -128,7 +129,7 @@ export function TodoCreateOrEdit({ isEdit, todo, todoDate, open, handleClose }: 
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="Date"
-              inputFormat="DD/MM/YYYY"
+              inputFormat={DATE_FORMAT}
               className="field"
               value={date}
               minDate={new Date()}
@@ -136,9 +137,9 @@ export function TodoCreateOrEdit({ isEdit, todo, todoDate, open, handleClose }: 
               renderInput={(params) => <TextField variant="filled" {...params} />}
             />
           </LocalizationProvider>
-          <div className={classes.todo__create_colors}>{colorElements}</div>
+          <div className={classes.todo__modal_colors}>{colorElements}</div>
 
-          <div className={classes.todo__create_btns}>
+          <div className={classes.todo__modal_btns}>
             <Button variant="contained" className="success_btn" onClick={() => handleSubmit()}>
               {isEdit ? "Edit" : "Create"}
             </Button>

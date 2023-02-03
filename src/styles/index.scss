@@ -8,6 +8,26 @@
   padding: 0;
 }
 
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--font-color) none;
+}
+
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 3px solid var(--bg-color);
+  border-radius: 10px;
+
+  background-color: var(--font-color);
+}
+
 body {
   font-family: 'Actor', serif !important;
 
@@ -22,7 +42,6 @@ h1 {
 .container {
   width: 390px;
   margin: 0 auto;
-  padding: 14px 20px;
   border-radius: 30px;
 
   background: var(--bg-color);

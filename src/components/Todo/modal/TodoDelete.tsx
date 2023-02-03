@@ -24,9 +24,9 @@ export function TodoDelete({ open, todoTitle, todoId, date, handleClose }: Props
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <div className={`modal container ${classes.todo__create}`}>
-        <h3 className={classes.todo__create_title}>{`Delete "${todoTitle}" task?`}</h3>
-        <div className={classes.todo__create_btns}>
+      <div className={`modal container ${classes.todo__modal}`}>
+        <h3 className={classes.todo__modal_title}>{`Delete "${todoTitle}" task?`}</h3>
+        <div className={classes.todo__modal_btns}>
           <Button variant="contained" className="success_btn" onClick={handleSubmit}>
             Delete
           </Button>

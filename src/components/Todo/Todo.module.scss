@@ -1,8 +1,22 @@
 .todo {
-  &__create {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    padding: 14px 0;
+  }
+
+  &__container {
+    height: 100%;
+    padding: 0 20px;
+    overflow-y: auto;
+  }
+
+  &__modal {
     display: flex;
     flex-direction: column;
     row-gap: 12px;
+    padding: 14px 20px;
 
     &_title {
       display: flex;
@@ -19,7 +33,7 @@
       column-gap: 16px;
     }
     &_color__active {
-      border: 2px solid var(--font-color);
+      border: 3px solid var(--bg-color);
     }
     &_colors {
       display: flex;
@@ -33,6 +47,16 @@
         cursor: pointer;
       }
     }
+  }
+
+  &__settings {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+
+    color: var(--font-color);
+    font-weight: bold;
   }
 
   &__header {

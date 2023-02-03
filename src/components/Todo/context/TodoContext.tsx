@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
+import dayjs from "dayjs";
 import { createContext, PropsWithChildren, useContext, useState } from "react";
-import { TODAY, TOMORROW, YESTERDAY } from "../../constants";
+import { DATE_FORMAT, TODAY, TOMORROW, YESTERDAY } from "~/constants";
 
 export const initialTodo = {
   [YESTERDAY]: [
@@ -76,10 +77,25 @@ const addTodoByDate = (todos: ITodoByDate, date: string, newTodo: ITodo) => {
   return listClone;
 };
 
-const deleteTodoByDate = (todos: ITodoByDate, date: string, todoId: number) => ({
-  ...todos,
-  [date]: todos[date].filter((todo) => todo.id !== todoId),
-});
+const deleteTodoByDate = (todos: ITodoByDate, date: string, todoId: number) => {
+  const listClone = { ...todos };
+  const filteredTodos = listClone[date].filter((todo) => todo.id !== todoId);
+  if (filteredTodos.length) {
+    return {
+      ...listClone,
+      [date]: filteredTodos,
+    };
+  }
+  delete listClone[date];
+  return listClone;
+};
+
+const sortTodosByDate = (todos: ITodoByDate) =>
+  Object.fromEntries(
+    Object.entries(todos).sort(
+      (a, b) => dayjs(a[0], DATE_FORMAT).unix() - dayjs(b[0], DATE_FORMAT).unix(),
+    ),
+  );
 
 const TodoContext = createContext<ITodoContext | null>(null);
 
@@ -87,7 +103,8 @@ export function TodoProvider({ children }: PropsWithChildren) {
   const [todos, setTodos] = useState<ITodoByDate>(initialTodo);
 
   const addTodo = (date: string, newTodo: ITodo) => {
-    setTodos(addTodoByDate(todos, date, newTodo));
+    const todosWithAdded = addTodoByDate(todos, date, newTodo);
+    setTodos(sortTodosByDate(todosWithAdded));
   };
 
   const deleteTodo = (date: string, todoId: number) => {
@@ -109,7 +126,7 @@ export function TodoProvider({ children }: PropsWithChildren) {
     if (date !== beforeDate) {
       const deletedTodo = deleteTodoByDate(todos, beforeDate, newTodo.id);
       const editedAndMovedTodo = addTodoByDate(deletedTodo, date, newTodo);
-      return setTodos(editedAndMovedTodo);
+      return setTodos(sortTodosByDate(editedAndMovedTodo));
     }
     const editedTodo = todos[date].map((todo) => {
       if (todo.id === newTodo.id) {

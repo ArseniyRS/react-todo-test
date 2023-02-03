@@ -1,0 +1,28 @@
+.footer {
+  position: relative;
+
+  width: 90%;
+  margin: 0 auto;
+  padding: 25px 0;
+  overflow: hidden;
+
+  color: var(--font-color);
+  p {
+    width: fit-content;
+    padding-left: 100%;
+
+    white-space: nowrap;
+    text-align: center;
+
+    animation: text 80s infinite linear;
+  }
+}
+@keyframes text {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
