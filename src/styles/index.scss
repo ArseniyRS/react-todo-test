@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Actor&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700&family=Actor&display=swap');
+@import 'variables.scss';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Actor', serif !important;
+
+  background: #111111;
+}
+
+h1 {
+  color: var(--font-color);
+  font-size: 36px;
+}
+
+.container {
+  width: 390px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  border-radius: 30px;
+
+  background: var(--bg-color);
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+.field {
+  width: 100%;
+  label {
+    color: var(--font-color) !important;
+  }
+  input,
+  textarea {
+    color: var(--font-color) !important;
+  }
+  fieldset {
+    border-color: var(--font-color) !important;
+    border-radius: 16px !important;
+  }
+  svg {
+    filter: invert(95%) sepia(0%) saturate(0%) hue-rotate(219deg) brightness(105%) contrast(105%);
+  }
+}
+
+.success_btn,
+.cancel_btn {
+  border-radius: 12px !important;
+
+  color: var(--bg-color) !important;
+  font-weight: bold !important;
+}
+
+.success_btn {
+  background-color: var(--green) !important;
+}
+
+.cancel_btn {
+  background-color: var(--red) !important;
+}
