@@ -1,0 +1,129 @@
+.todo {
+  &__create {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+
+    &_title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      color: var(--font-color);
+    }
+
+    &_btns {
+      display: flex;
+      margin-top: 12px;
+
+      column-gap: 16px;
+    }
+    &_color__active {
+      border: 2px solid var(--font-color);
+    }
+    &_colors {
+      display: flex;
+
+      column-gap: 12px;
+      div {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 17px;
+
+    &_settings {
+      display: flex;
+      align-items: flex-end;
+
+      column-gap: 12px;
+    }
+  }
+
+  &__color_border {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 5px;
+    height: 100%;
+    border-radius: 3px;
+
+    background-color: var(--gray);
+  }
+  &__item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px 0 14px;
+
+    h4 {
+      color: var(--font-color);
+      font-weight: 600;
+      font-size: 24px;
+    }
+
+    p {
+      max-width: 200px;
+      overflow: hidden;
+
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 600;
+      font-size: 14px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &_title {
+      cursor: pointer;
+    }
+
+    &_container {
+      margin-bottom: 32px;
+      padding: 20px 25px;
+      border-radius: 25px;
+
+      background: #282828;
+      box-shadow: var(--shadow);
+
+      &__title {
+        position: relative;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 6px 0 14px;
+
+        color: var(--font-color);
+        font-weight: 600;
+        font-size: 24px;
+
+        cursor: pointer;
+      }
+      &__list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+      }
+      button {
+        border: none;
+
+        background: none;
+        cursor: pointer;
+        img {
+          transition: 0.3s all;
+        }
+      }
+    }
+  }
+}
